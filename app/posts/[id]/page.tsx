@@ -4,12 +4,15 @@ import PostDetailsClient from './PostDetails.client';
 import type { Metadata } from 'next';
 
 type PostDetailsProps = {
-  params: { id: string };
+  // params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 // SEO метадані (title + description з body)
 export async function generateMetadata({ params }: PostDetailsProps): Promise<Metadata> {
-  const id = Number(params.id);
+// const id = Number(params.id);
+const { id } = await params;
+
   const post = await fetchPostById(id);
 
   return {
