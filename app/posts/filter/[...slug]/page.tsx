@@ -1,9 +1,6 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-
 import { fetchPosts } from '@/lib/api';
-
 import PostsClient from './Posts.client';
-
 
 type Props = {
   params: Promise<{ slug?: string[] }>;
