@@ -79,7 +79,7 @@ export default function PostsClient({ initialData, userId }: PostsClientProps) {
             >
               Create post +
             </button>
-            
+
           </header>
 
           {isModalOpen && (

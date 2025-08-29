@@ -31,6 +31,7 @@ export default function PostList({ posts, toggleModal, toggleEditPost }: PostLis
             <Link className={css.link} href={`/posts/${post.id}`} scroll={false}>
               View details
             </Link>{' '}
+            
             <button
               className={css.link}
               onClick={() => {
@@ -40,9 +41,11 @@ export default function PostList({ posts, toggleModal, toggleEditPost }: PostLis
             >
               Edit
             </button>
+
             <button className={css.button} onClick={() => mutation.mutate(post.id)}>
               Delete
             </button>
+
           </div>
         </li>
       ))}
