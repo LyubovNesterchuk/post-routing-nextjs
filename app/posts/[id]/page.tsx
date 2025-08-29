@@ -11,9 +11,8 @@ type PostDetailsProps = {
 // SEO метадані (title + description з body)
 export async function generateMetadata({ params }: PostDetailsProps): Promise<Metadata> {
 // const id = Number(params.id);
-const { id } = await params;
-
-  const post = await fetchPostById(id);
+  const { id } = await params;
+  const post = await fetchPostById(Number(id));
 
   return {
     title: post.title,
@@ -22,12 +21,13 @@ const { id } = await params;
 }
 
 export default async function PostDetails({ params }: PostDetailsProps) {
-  const id = Number(params.id);
-
-  const queryClient = new QueryClient();
+  // const id = Number(params.id);
+  const { id } = await params;
+  const queryClient = new QueryClient(); 
+  
   await queryClient.prefetchQuery({
     queryKey: ['post', id],
-    queryFn: () => fetchPostById(id),
+    queryFn: () => fetchPostById(Number(id)),
   });
 
   return (
