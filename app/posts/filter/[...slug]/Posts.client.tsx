@@ -56,9 +56,13 @@ export default function PostsClient({ initialData, userId }: PostsClientProps) {
   return (
     <div className={css.app}>
       <main className={css.main}>
+
         <section className={css.postsSection}>
+
           <header className={css.toolbar}>
+
             <SearchBox onSearch={changeSearchQuery} />
+            
             {totalPages > 1 && (
               <Pagination
                 totalPages={totalPages}
@@ -75,7 +79,9 @@ export default function PostsClient({ initialData, userId }: PostsClientProps) {
             >
               Create post +
             </button>
+            
           </header>
+
           {isModalOpen && (
             <Modal onClose={toggleModal}>
               {editedPost ? (
@@ -91,9 +97,17 @@ export default function PostsClient({ initialData, userId }: PostsClientProps) {
               )}
             </Modal>
           )}
-          {posts.length > 0 && (
-            <PostList posts={posts} toggleModal={toggleModal} toggleEditPost={toggleEditPost} />
+
+          {posts.length > 0 ? (
+            <PostList
+              posts={posts}
+              toggleModal={toggleModal}
+              toggleEditPost={toggleEditPost}
+            />
+          ) : (
+            <p className={css.text}>No posts found</p>
           )}
+
         </section>
       </main>
     </div>

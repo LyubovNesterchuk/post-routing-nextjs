@@ -52,3 +52,12 @@
 .button:hover {
   border: 1px solid #fff;
 }
+
+.text{
+  color: #fff;
+  font-family: 'Open Sans';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
