@@ -53,7 +53,7 @@ export const deletePost = async (postId: number) => {
   return response.data;
 };
 
-export const fetchPostById = async (postId: number) => {
+export const fetchPostById = async (postId: number): Promise<Post> => {
   const response = await axios.get<Post>(`/posts/${postId}`);
   return response.data;
 };
@@ -63,7 +63,7 @@ export const fetchUsers = async (): Promise<User[]> => {
   return response.data;
 };
 
-export const fetchUserById = async (userId: number) => {
+export const fetchUserById = async (userId: number): Promise<User> => {
   const response = await axios.get<User>(`/users/${userId}`);
   return response.data;
 };

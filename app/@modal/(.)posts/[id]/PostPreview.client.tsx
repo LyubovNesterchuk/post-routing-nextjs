@@ -9,20 +9,22 @@ import css from './PostPreview.module.css';
 export default function PostPreviewClient() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const handleClose = () => router.back();
 
-    const { data: post, isLoading, isError } = useQuery({
+  const { data: post, isLoading, isError } = useQuery({
     queryKey: ['post', id],
     queryFn: () => fetchPostById(Number(id)),
     refetchOnMount: false,
   });
 
-    const { data: user } = useQuery({
+  const { data: user } = useQuery({
     queryKey: ['user', post?.userId],  // якщо post існує, то візьми post.userId, інакше поверни undefined
     queryFn: () => fetchUserById(post!.userId), // post тут не null і не undefined
     enabled: !!post, // виконується лише після завантаження поста
   });
 
+  const handleClose = () => {
+    router.back();
+  };
 
   if (isLoading) {
     return <Modal onClose={handleClose}>Loading, please wait...</Modal>;
@@ -37,6 +39,7 @@ export default function PostPreviewClient() {
       <button className={css.backBtn} onClick={handleClose}>
         ← Back
       </button>
+
       <div className={css.post}>
         <div className={css.wrapper}>
           <div className={css.header}>
@@ -46,6 +49,7 @@ export default function PostPreviewClient() {
         </div>
         <p className={css.user}>{user?.name ?? 'Loading author...'}</p>
       </div>
+      
     </Modal>
   );
 }

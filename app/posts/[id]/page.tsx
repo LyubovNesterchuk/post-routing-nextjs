@@ -11,16 +11,19 @@ type PostDetailsProps = {
 export async function generateMetadata({ params }: PostDetailsProps): Promise<Metadata> {
   const {id} = await params;
   const post = await fetchPostById(Number(id));
+  
+  console.log(post);
 
   return {
-    title: post.title,
-    description: post.body.slice(0, 30) + '...',
+    title: `Post: ${post.title}`,
+    description: `${post.body.slice(0, 30)}...`,
   };
 }
 
 export default async function PostDetails({ params }: PostDetailsProps) {
   const {id} = await params;
-
+  console.log(typeof id);
+  
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['post', id],
@@ -33,3 +36,4 @@ export default async function PostDetails({ params }: PostDetailsProps) {
     </HydrationBoundary>
   );
 }
+
